@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Accounts urls
 
 LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"
 
 
 # Application definition
