@@ -2,7 +2,13 @@ from django import forms
 from tasks.models import Task
 
 
-class TaskForm(forms.ModelForm):
+class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ["name", "start_date", "due_date", "project", "assignee"]
+
+
+# class TaskUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Task
+#         fields = ["is_completed"]
