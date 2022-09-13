@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main>
+    <div>
+        <h1>{{ project_detail.name }}</h1>
+            <p>{{ project_detail.description }}</p>
+        <h2>Tasks</h2>
+            {% if project_detail.tasks.all %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Assignee</th>
+                        <th>Start date</th>
+                        <th>Due date</th>
+                        <th>Is completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in project_detail.tasks.all %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.assignee }}</td>
+                        <td>{{ i.start_date }}</td>
+                        <td>{{ i.due_date }}</td>
+                        <td>{% if i.is_completed is True %}
+                            yes
+                            {% else %}
+                            no
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>This project has no tasks.</p>
+            {% endif %}
+    </div>
+</main>
+
+{% endblock content %}
