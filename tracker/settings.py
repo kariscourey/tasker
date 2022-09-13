@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "projects.apps.ProjectsConfig",
     "tasks.apps.TasksConfig",
+    "markdownify.apps.MarkdownifyConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+MARKDOWNIFY = {"default": {"BLEACH": False}}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
