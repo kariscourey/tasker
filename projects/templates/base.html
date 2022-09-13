@@ -21,13 +21,13 @@
                         Welcome, {{ user.username }}!
                     </li>
                     <li>
-                        <a href="{% url 'list_projects' %}">Projects</a>
+                        <a href="{% url 'list_projects' %}">My projects</a>
                     </li>
                     <li>
                         <a href="{% url 'create_project' %}">Create project</a>
                     </li>
                     <li>
-                        <a href="{% url 'show_my_tasks' %}">My Tasks</a>
+                        <a href="{% url 'show_my_tasks' %}">My tasks</a>
                     </li>
                     <li>
                         <a href="{% url 'create_task' %}">Create task</a>
@@ -37,7 +37,7 @@
                     </li>
                     {% else %}
                     <li>
-                        <a href="{% url 'signup' %}">Sign Up</a>
+                        <a href="{% url 'signup' %}">Signup</a>
                     </li>
                     <li>
                         <a href="{% url 'login' %}">Login</a>
