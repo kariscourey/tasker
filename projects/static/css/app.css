@@ -1,0 +1,33 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 6fr 1fr;
+    /* grid-template-rows: 1fr 4fr 2fr; */
+    /* justify-content: center; */
+}
+
+html {
+    background-color: black;
+    font: 0.9rem Inconsolata, monospace;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+thead {
+    color: white;
+}
+
+tbody {
+    color: greenyellow;
+}
+
+a,
+ul,
+p {
+    color: greenyellow;
+}

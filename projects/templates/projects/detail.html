@@ -28,8 +28,8 @@
                             <tr>
                                 <td>{{ i.name }}</td>
                                 <td>{{ i.assignee }}</td>
-                                <td>{{ i.start_date }}</td>
-                                <td>{{ i.due_date }}</td>
+                                <td>{{ i.start_date | date:"m-d-Y" }}</td>
+                                <td>{{ i.due_date | date:"m-d-Y" }}</td>
                                 <td>{% if i.is_completed is True %}
                                     yes
                                 {% else %}
