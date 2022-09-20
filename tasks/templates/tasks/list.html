@@ -3,7 +3,7 @@
 {% block content %}
 
     <main>
-        <div>
+        <div class="my-tasks-list">
             <h1>My Tasks</h1>
 
             {% if tasks_list %}
@@ -14,6 +14,7 @@
                             <th>Start date</th>
                             <th>End date</th>
                             <th>Is completed</th>
+                            <th>Notes</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,16 @@
                                     </form>
                                 {% endif %}
                                 </td>
+                                {% if i.notes %}
+                                <td>{{ i.notes }}</td>
+                                {% else %}
+                                <td>
+                                    <form method="get" action="{% url 'add_notes' i.id %}">
+                                        <input type="hidden" name="add_notes" value="True">
+                                        <button>+ Add</button>
+                                    </form>
+                                </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

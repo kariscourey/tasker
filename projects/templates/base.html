@@ -13,7 +13,6 @@
 
     <body>
         <header>
-            <h1>Tracker</h1>
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
@@ -48,6 +47,10 @@
         </header>
         {% block content %}
         {% endblock content %}
+
+        {% block pagination %}
+        {% endblock pagination %}
+
         <!-- <pre>{% debug %}</pre> -->
     </body>
 

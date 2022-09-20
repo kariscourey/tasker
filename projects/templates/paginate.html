@@ -1,0 +1,35 @@
+<!-- unimplemented -->
+
+{% extends 'base.html' %}
+
+<!-- https://dontrepeatyourself.org/post/django-pagination-with-function-based-view/ -->
+
+{% block pagination %}
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if not projects_list.has_previous %} disabled {% endif %}">
+            <a class="page-link" href="{% if projects_list.has_previous %} {% url 'list_projects' projects_list.previous_page_number %}{% endif %} ">Previous</a>
+        </li>
+
+        {% if projects_list.number|add:'-1' > 1 %}
+            <li class="page-item disabled"><a class="page-link">&hellip;</a></li>
+        {% endif %}
+
+        {% for i in projects_list.paginator.page_range %}
+            {% if projects_list.number == i %}
+                <li class="active page-item disabled"><a class="page-link" href="#">{{ i }}</a></li>
+            {% elif i > projects_list.number|add:'-2' and i < projects_list.number|add:'2' %}
+                <li class="page-item"><a class="page-link" href="{% url 'list_projects' i %}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if projects_list.paginator.num_pages > projects_list.number|add:'1' %}
+            <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+        {% endif %}
+
+        <li class="page-item {% if not projects_list.has_next %} disabled {% endif %}">
+            <a class="page-link" href="{% if projects_list.has_next %} {% url 'list_projects' projects_list.next_page_number %} {% endif %}">Next</a>
+        </li>
+    </ul>
+  </nav>
+{% endblock pagination %}
