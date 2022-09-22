@@ -21,6 +21,8 @@
                     </select>
                     <button>Search</button>
                 </form>
+            </p>
+            <p>
                 <form method="post">
                     {% csrf_token %}
                     <input type="hidden" name="show_all" value="True">
@@ -29,14 +31,17 @@
                 {% if bad_search %}
                 Invalid selection.
                 {% endif %}
+            </p>
+            <p>
                 <form method="post">
                     {% csrf_token %}
-                    <select name="filter">
-                        <option value="" disabled selected hidden>Filter by</option>
+                    <select name="sort">
+                        <option value="" disabled selected hidden>Sort by</option>
                         <option value="name">Name</option>
                         <option value="-date_added">Date</option>
+                        <option value="tasks"># Tasks</option>
                     </select>
-                    <button>Filter</button>
+                    <button>Sort</button>
                 </form>
             </p>
 

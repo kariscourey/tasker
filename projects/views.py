@@ -3,12 +3,15 @@ from projects.models import Project, Company
 from projects.forms import ProjectForm
 from tasks.models import Task
 from django.contrib.auth.decorators import login_required
+from django.db.models.functions import Length
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Max
+
 # from django.core.paginator import Paginator, EmptyPage
 
 
 @login_required
-def list_projects(request):  #, page=1):
+def list_projects(request):  # , page=1):
 
     # paginator = Paginator(projects_list, 10)
 
@@ -19,41 +22,52 @@ def list_projects(request):  #, page=1):
 
     bad_search = False
     companies_list = Company.objects.all()
-    filter = "name"
+    sort = None
+    company_name = None
 
     if request.method == "POST":
 
+        # TODO compound sorting/filtering
+
         company_name = request.POST.get("company_name")
-        show_all = request.POST.get("show_all")
+        # show_all = request.POST.get("show_all")
+        sort = request.POST.get("sort")
         bad_search = False
 
-        # TODO figure out filtering, company selection
-
-        if request.POST.get("filter") is not None:
-            filter = request.POST.get("filter")
-
-        if show_all:
-            projects_list = Project.objects.filter(members=request.user)
-
-        else:
+        if company_name:
             try:
-                # functionality added in if select field not hidden, but currently is
                 company_id = Company.objects.get(name=company_name).id
-                projects_list = Project.objects.filter(members=request.user, company_id=company_id)
+                projects_list = Project.objects.filter(
+                    members=request.user, company_id=company_id
+                )
             except ObjectDoesNotExist:
                 bad_search = True
-                projects_list = Project.objects.filter(members=request.user)
+                # projects_list = Project.objects.filter(members=request.user)
+
+        # elif show_all:
+        #     projects_list = Project.objects.filter(members=request.user)
+
+        elif sort:
+            print(sort)
+            if sort == "tasks":
+                sort = Length(sort)
+                projects_list = set(Project.objects.filter(members=request.user).order_by(sort))
+            else:
+                projects_list = Project.objects.filter(members=request.user).order_by(sort)
+
+        else:
+            projects_list = Project.objects.filter(members=request.user)
 
     else:
         projects_list = Project.objects.filter(members=request.user)
-
-    projects_list = projects_list.order_by(filter)
 
 
     context = {
         "projects_list": projects_list,
         "bad_search": bad_search,
         "companies_list": companies_list,
+        "sort": sort,
+        "company_name": company_name,
     }
 
     return render(request, "projects/list.html", context)
@@ -107,7 +121,9 @@ def update_project(request, pk):
                 return redirect("show_project", pk=project_instance.id)
 
             else:
-                project_instance.tasks.filter(assignee_id=request.user.id).update(assignee_id=None)
+                project_instance.tasks.filter(
+                    assignee_id=request.user.id
+                ).update(assignee_id=None)
                 return redirect("list_projects")
 
         return redirect("show_project", pk=project_instance.id)
@@ -115,8 +131,8 @@ def update_project(request, pk):
         form = ProjectForm(instance=project_instance)
 
     context = {
-            "form": form,
-            "project_instance": project_instance,
-        }
+        "form": form,
+        "project_instance": project_instance,
+    }
 
     return render(request, "projects/update.html", context)
