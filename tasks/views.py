@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from tasks.models import Task
-from tasks.forms import TaskCreateForm, TaskNotesForm  # , TaskUpdateForm
+from tasks.forms import TaskCreateForm, TaskNotesForm, TaskUpdateForm, TaskAssigneeForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,12 +16,13 @@ def list_tasks(request):
 @login_required
 def create_task(request):
     if request.method == "POST":
-        form = TaskCreateForm(request.POST)
+        form = TaskCreateForm(request.POST, current_user=request.user)
         if form.is_valid():
             task = form.save()
         return redirect("show_project", pk=task.project.id)
     else:
-        form = TaskCreateForm()
+        # current_project = request.GET.get("current_project")
+        form = TaskCreateForm(current_user=request.user)  # , initial={'project': current_project})  # , current_project=current_project)
 
     context = {"form": form}
 
@@ -45,7 +46,6 @@ def add_notes(request, pk):
     task_set = Task.objects.filter(id=pk)
     task_instance = Task.objects.get(id=pk)
 
-
     if request.method == "POST":
 
         form = TaskNotesForm(request.POST)
@@ -65,4 +65,55 @@ def add_notes(request, pk):
             "task_name": task_instance.name,
         }
 
+    return render(request, "tasks/update_notes.html", context)
+
+
+@login_required
+def update_task(request, pk):
+
+    task_instance = Task.objects.get(id=pk)
+    current_project = task_instance.project
+    current_user = request.user
+
+
+    if request.method == "POST":
+
+        form = TaskUpdateForm(request.POST, instance=task_instance, current_project=current_project, current_user=current_user)
+
+        if form.is_valid():
+            form.save()
+        return redirect("show_my_tasks")
+    else:
+        form = TaskUpdateForm(instance=task_instance, current_project=current_project, current_user=current_user)
+
+    context = {
+            "form": form,
+            "task_instance": task_instance,
+        }
+
     return render(request, "tasks/update.html", context)
+
+
+@login_required
+def add_assignee(request, pk):
+
+    task_set = Task.objects.filter(id=pk)
+    task_instance = Task.objects.get(id=pk)
+
+    if request.method == "POST":
+
+        form = TaskAssigneeForm(request.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            task_set.update(assignee=instance.assignee)
+        return redirect("show_project", pk=task_instance.project.id)
+    else:
+        form = TaskAssigneeForm()
+
+    context = {
+            "form": form,
+            "task_name": task_instance.name,
+        }
+
+    return render(request, "tasks/update_assignee.html", context)

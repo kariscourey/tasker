@@ -2,7 +2,7 @@
 {% block content %}
     <main>
         <div class="task-form">
-            <h1>Update {{task_instance.name}}</h1>
+            <h1>Update {{task_name}} assignee</h1>
             <form method="post">
                 {{ form.as_p }}
                 {% csrf_token %}

@@ -15,7 +15,7 @@ select {
 /* Set the background color of all pages */
 html,
 body {
-    background-color: #F2F2F2;
+    background-image: url('..assets/pattern.svg'), linear-gradient(90deg, #00C9FF, 0%, #92FE9D 100%);
 }
 
 /* Set the style of the navigation list */

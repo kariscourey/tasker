@@ -6,8 +6,38 @@
         <div class="project-list">
             <h1>My Projects</h1>
 
-            <p>
+            <!-- <p>
                 <a href="{% url 'create_project' %}">Create a new project</a>
+            </p> -->
+            <p>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden">
+                    <select name="company_name">
+                        <option value="" disabled selected hidden>Select company</option>
+                        {% for i in companies_list.all %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+                    <button>Search</button>
+                </form>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="show_all" value="True">
+                    <button>Show all</button>
+                </form>
+                {% if bad_search %}
+                Invalid selection.
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <select name="filter">
+                        <option value="" disabled selected hidden>Filter by</option>
+                        <option value="name">Name</option>
+                        <option value="-date_added">Date</option>
+                    </select>
+                    <button>Filter</button>
+                </form>
             </p>
 
             {% if projects_list %}
@@ -16,6 +46,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Number of tasks</th>
+                            <th>Company</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +54,7 @@
                             <tr>
                                 <td><a href="{% url 'show_project' i.id %}">{{ i.name }}</a></td>
                                 <td>{{ i.tasks.all|length }}</td>
+                                <td>{{ i.company }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

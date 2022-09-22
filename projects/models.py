@@ -14,6 +14,7 @@ class Project(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.name

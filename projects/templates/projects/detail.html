@@ -8,10 +8,16 @@
         <div class="project-detail">
             <h1>{{ project_detail.name }}</h1>
             <p>{{ project_detail.description|markdownify }}</p>
-            <h2>Tasks</h2>
             <p>
-                <a href="{% url 'create_task' %}">Create a new task</a>
+                <a href="{% url 'update_project' project_detail.id %}">Update project</a>
             </p>
+            <h2>Tasks</h2>
+            <!-- <p>
+                <form method="get" action="{% url 'create_task'%}">
+                    <input type="hidden" name="current_project" value="{{project_detail.name}}">
+                    <button>Create a new task</button>
+                </form>
+            </p> -->
             {% if project_detail.tasks.all %}
                 <table>
                     <thead>
@@ -21,13 +27,23 @@
                             <th>Start date</th>
                             <th>Due date</th>
                             <th>Is completed</th>
+                            <th>Notes</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in project_detail.tasks.all %}
                             <tr>
-                                <td>{{ i.name }}</td>
+                                <td><a href="{% url 'update_task' i.id %}">{{ i.name }}</a></td>
+                                {% if i.assignee %}
                                 <td>{{ i.assignee }}</td>
+                                {% else %}
+                                <td>
+                                    <form method="get" action="{% url 'add_assignee' i.id %}">
+                                        <input type="hidden" name="add_assignee" value="True">
+                                        <button>+ Add</button>
+                                    </form>
+                                </td>
+                                {% endif %}
                                 <td>{{ i.start_date | date:"m-d-Y" }}</td>
                                 <td>{{ i.due_date | date:"m-d-Y" }}</td>
                                 <td>{% if i.is_completed is True %}
@@ -36,6 +52,16 @@
                                     no
                                 {% endif %}
                                 </td>
+                                {% if i.notes %}
+                                <td>{{ i.notes }}</td>
+                                {% else %}
+                                <td>
+                                    <form method="get" action="{% url 'add_notes' i.id %}">
+                                        <input type="hidden" name="add_notes" value="True">
+                                        <button>+ Add</button>
+                                    </form>
+                                </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>
