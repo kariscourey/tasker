@@ -15,12 +15,12 @@ select {
 /* Set the background color of all pages */
 html,
 body {
-    background-image: url('..assets/pattern.svg'), linear-gradient(90deg, #00C9FF, 0%, #92FE9D 100%);
+    background-color: #F2F2F2;
 }
 
 /* Set the style of the navigation list */
 header nav ul {
-    background-color: white;
+    background-color: cornflowerblue;
     border-bottom: 1px solid #CCC;
     box-sizing: border-box;
     list-style: none;
@@ -40,6 +40,7 @@ header nav ul li {
 header nav ul li a {
     font-weight: bold;
     text-decoration: none;
+    color: black;
 }
 
 /* Make the input tags look nicer */
@@ -51,7 +52,8 @@ input {
 
 /* Make the select boxes look nicer */
 select {
-    height: 2.5em;
+    height: 2.1em;
+    width: 15em;
 }
 
 /* Make the select-multiple boxes look nicer */
@@ -138,7 +140,8 @@ table {
 .my-tasks-list button,
 .login-form button,
 .signup-form button,
-.project-form button {
+.project-form button,
+.project-list button {
     padding: 0.25em 1em;
 }
 

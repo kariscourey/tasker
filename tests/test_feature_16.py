@@ -89,9 +89,9 @@ class FeatureTests(TestCase):
             msg="Could not find h1 tag at html > body > main > div > h1",
         )
         self.assertIn(
-            "My Tasks",
+            "My tasks",
             h1.inner_text(),
-            msg="Could not find 'My Tasks' in the h1 tag",
+            msg="Could not find 'My tasks' in the h1 tag",
         )
 
     def test_has_h1_tag_for_tasks(self):
@@ -101,7 +101,7 @@ class FeatureTests(TestCase):
             msg="Could not find h1 tag at html > body > main > div > h1",
         )
         self.assertIn(
-            "My Tasks",
+            "My tasks",
             h1.inner_text(),
-            msg="Could not find 'My Tasks' in the h1 tag",
+            msg="Could not find 'My tasks' in the h1 tag",
         )

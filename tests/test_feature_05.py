@@ -102,9 +102,9 @@ class FeatureTests(TestCase):
                 msg="The response did not have an h1 tag as a direct child of the div",  # noqa: E501
             )
             self.assertIn(
-                "My Projects",
+                "My projects",
                 h1.inner_text(),
-                msg="h1 did not have content 'My Projects'",
+                msg="h1 did not have content 'My projects'",
             )
 
     def test_div_tag_has_a_p_tag_when_no_projects_with_message(self):
