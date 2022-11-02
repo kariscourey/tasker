@@ -14,8 +14,10 @@ python manage.py runserver
 
 ## Design
 
-### Service microservice
+### Tasker monolith
 
-Explain your models and integration with the inventory
-microservice, here.
-Angel to do as part of stretch goals next week.
+#### Accounts
+
+#### Tasks
+
+#### Projects
