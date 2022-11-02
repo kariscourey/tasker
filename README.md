@@ -1,13 +1,29 @@
 # Tasker
 Task-management solution designed for cross-company utilization. Supports task and project creation and management.
 
+
+## Tools, techniques, languages
+
+### Tools
+Django <br/>
+
+### Techniques
+Templating <br/>
+Monolith <br/>
+
+### Languages
+Python 3 <br/>
+HTML <br/>
+CSS <br/>
+
+
 ## Get started
 
-#### Activate virtual environment
-macOS: source ./.venv/bin/activate   <br />
+### Activate virtual environment
+macOS: source ./.venv/bin/activate   <br/>
 Windows: ./.venv/Scripts/Activate.ps1
 
-#### Run development server
+### Run development server
 python manage.py runserver
 
 
