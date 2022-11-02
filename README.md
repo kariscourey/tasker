@@ -3,18 +3,18 @@ Task-management solution designed for cross-company utilization. Supports task a
 
 ## Get started
 
-# Activate virtual environment
+### Activate virtual environment
 source ./.venv/bin/activate  # macOS
 ./.venv/Scripts/Activate.ps1 # Windows
 
-# Run development server
+### Run development server
 python manage.py runserver
 
 
 
 ## Design
 
-## Service microservice
+### Service microservice
 
 Explain your models and integration with the inventory
 microservice, here.
