@@ -4,7 +4,7 @@ Task-management solution designed for cross-company utilization. Supports task a
 ## Get started
 
 ### Activate virtual environment
-source ./.venv/bin/activate  # macOS
+source ./.venv/bin/activate  # macOS <br />
 ./.venv/Scripts/Activate.ps1 # Windows
 
 ### Run development server
