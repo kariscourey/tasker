@@ -2,7 +2,7 @@
 Task-management solution designed for cross-company utilization. Supports task and project creation and management.
 
 
-## Tools, techniques, languages
+## Key highlights
 
 ### Tools
 Django <br/>
