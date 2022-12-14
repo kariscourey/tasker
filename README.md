@@ -11,7 +11,7 @@ Task-management solution designed for cross-company utilization. Supports task a
 
 
 ## Intended Market
-
+Individuals and companies who desire to better organize projects and tasks associated with projects.
 
 ## Functionality
 - Create an account, login, and logout
