@@ -15,9 +15,9 @@ Inherited from Django Users.
 | ----------------  | ----------------- | ------ | -------- |
 | id                | int               | yes    | no       |
 | name              | string            | no     | no       |
-| start_date        | string            | no     | no       |
-| due_date          | string            | no     | no       |
-| is_completed      | string            | no     | yes      |
+| start_date        | date              | no     | no       |
+| due_date          | date              | no     | no       |
+| is_completed      | boolean           | no     | yes      |
 | project           | ref to project    | no     | no       |
 | assignee          | ref to account    | no     | no       |
 | notes             | string            | no     | yes      |
@@ -32,9 +32,9 @@ Inherited from Django Users.
 | id                | int               | yes    | no       |
 | name              | string            | no     | no       |
 | description       | string            | no     | yes      |
-| members           | string            | no     | no       |
-| company           | string            | no     | yes      |
-| date_added        | ref to project    | no     | no       |
+| members           | ref to user       | no     | no       |
+| company           | ref to company    | no     | yes      |
+| date_added        | date              | no     | no       |
 
 
 ### Company
