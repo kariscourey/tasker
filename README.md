@@ -10,6 +10,15 @@ Task-management solution designed for cross-company utilization. Supports task a
 - [Methods](docs/methods.md)
 
 
+## Intended Market
+
+
+## Functionality
+- Create an account, login, and logout
+- Create and view projects
+- Create and view tasks
+
+
 ## Project Initialization
 
 To fully enjoy this application on your local machine, please make sure to follow these steps:

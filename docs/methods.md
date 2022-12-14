@@ -1,13 +1,13 @@
-## Methods
+# Methods
 
-### Tools
+## Tools
 Django <br/>
 
-### Techniques
+## Techniques
 Templating <br/>
 Monolith <br/>
 
-### Languages
+## Languages
 Python 3 <br/>
 HTML <br/>
 CSS <br/>
