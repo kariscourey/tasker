@@ -36,7 +36,7 @@ Windows: `./.venv/Scripts/Activate.ps1`
 
 
 ## Project Deactivation
-1. Clost development server
+1. Close development server
 2. Run `deactivate`
 
 
