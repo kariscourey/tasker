@@ -2,16 +2,12 @@
 
 ## Accounts application
 
----
-
 ### Account
 
 Inherited from Django Users.
 
 
 ## Tasks application
-
----
 
 ### Task
 
@@ -28,8 +24,6 @@ Inherited from Django Users.
 
 
 ## Projects application
-
----
 
 ### Project
 
