@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from tasks.models import Task
-from tasks.forms import TaskCreateForm, TaskNotesForm, TaskUpdateForm, TaskAssigneeForm
+from tasks.forms import (
+    TaskCreateForm,
+    TaskNotesForm,
+    TaskUpdateForm,
+    TaskAssigneeForm
+)
 from django.contrib.auth.decorators import login_required
 
 
@@ -21,8 +26,7 @@ def create_task(request):
             task = form.save()
         return redirect("show_project", pk=task.project.id)
     else:
-        # current_project = request.GET.get("current_project")
-        form = TaskCreateForm(current_user=request.user)  # , initial={'project': current_project})  # , current_project=current_project)
+        form = TaskCreateForm(current_user=request.user)
 
     context = {"form": form}
 
@@ -57,9 +61,6 @@ def add_notes(request, pk):
     else:
         form = TaskNotesForm()
 
-    # https://stackoverflow.com/questions/67544328/queryset-object-has-no-attribute-name-django
-    # You're using .filter() which will return a QuerySet and not a instance of a model. You should use .get() for this scenario to access the name attribute.
-
     context = {
             "form": form,
             "task_name": task_instance.name,
@@ -75,16 +76,24 @@ def update_task(request, pk):
     current_project = task_instance.project
     current_user = request.user
 
-
     if request.method == "POST":
 
-        form = TaskUpdateForm(request.POST, instance=task_instance, current_project=current_project, current_user=current_user)
+        form = TaskUpdateForm(
+            request.POST,
+            instance=task_instance,
+            current_project=current_project,
+            current_user=current_user
+        )
 
         if form.is_valid():
             form.save()
         return redirect("show_my_tasks")
     else:
-        form = TaskUpdateForm(instance=task_instance, current_project=current_project, current_user=current_user)
+        form = TaskUpdateForm(
+            instance=task_instance,
+            current_project=current_project,
+            current_user=current_user
+        )
 
     context = {
             "form": form,

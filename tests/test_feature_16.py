@@ -73,12 +73,12 @@ class FeatureTests(TestCase):
             msg="Found the word 'Done' when I shouldn't have",
         )
 
-    def test_my_tasks_with_one_task_has_four_td_tags(self):
+    def test_my_tasks_with_one_task_has_six_td_tags(self):
         html = self.task_document.select("html")
         cells = html.get_all_children("td")
         self.assertEqual(
             len(cells),
-            4,
+            6,
             msg="Should only have td tags for data rows",
         )
 

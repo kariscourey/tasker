@@ -5,12 +5,18 @@ from tasks.models import Task
 class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ["name", "start_date", "due_date", "project", "assignee", "notes"]
+        fields = [
+            "name",
+            "start_date",
+            "due_date",
+            "project",
+            "assignee",
+            "notes"
+        ]
 
     def __init__(self, *args, **kwargs):
 
         current_user = kwargs.pop("current_user", None)
-        # current_project = kwargs.pop("current_project", None)
 
         super(TaskCreateForm, self).__init__(*args, **kwargs)
 
@@ -19,12 +25,6 @@ class TaskCreateForm(forms.ModelForm):
                 "project"
             ].queryset.filter(members=current_user)
 
-        # if current_project:
-        #     self.fields["project"] = current_project
-
-        # OFIs
-        # once project selected, only show particular assignees
-
         self.fields["notes"].required = False
         self.fields["assignee"].required = False
 
@@ -32,7 +32,14 @@ class TaskCreateForm(forms.ModelForm):
 class TaskUpdateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ["name", "start_date", "due_date", "project", "assignee", "notes"]
+        fields = [
+            "name",
+            "start_date",
+            "due_date",
+            "project",
+            "assignee",
+            "notes"
+        ]
 
     def __init__(self, *args, **kwargs):
 

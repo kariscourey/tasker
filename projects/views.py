@@ -1,24 +1,13 @@
 from django.shortcuts import render, redirect
 from projects.models import Project, Company
 from projects.forms import ProjectForm
-from tasks.models import Task
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import Length
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Max
-
-# from django.core.paginator import Paginator, EmptyPage
 
 
 @login_required
-def list_projects(request):  # , page=1):
-
-    # paginator = Paginator(projects_list, 10)
-
-    # try:
-    #     projects_list = paginator.page(page)
-    # except EmptyPage:
-    #     projects_list = paginator.page(paginator.num_pages)
+def list_projects(request):
 
     bad_search = False
     companies_list = Company.objects.all()
@@ -27,10 +16,7 @@ def list_projects(request):  # , page=1):
 
     if request.method == "POST":
 
-        # TODO compound sorting/filtering
-
         company_name = request.POST.get("company_name")
-        # show_all = request.POST.get("show_all")
         sort = request.POST.get("sort")
         bad_search = False
 
@@ -42,25 +28,23 @@ def list_projects(request):  # , page=1):
                 )
             except ObjectDoesNotExist:
                 bad_search = True
-                # projects_list = Project.objects.filter(members=request.user)
-
-        # elif show_all:
-        #     projects_list = Project.objects.filter(members=request.user)
 
         elif sort:
             print(sort)
             if sort == "tasks":
                 sort = Length(sort)
-                projects_list = set(Project.objects.filter(members=request.user).order_by(sort))
+                projects_list = set(
+                    Project.objects.filter(members=request.user).order_by(sort)
+                )
             else:
-                projects_list = Project.objects.filter(members=request.user).order_by(sort)
+                projects_list = Project.objects.filter(
+                    members=request.user).order_by(sort)
 
         else:
             projects_list = Project.objects.filter(members=request.user)
 
     else:
         projects_list = Project.objects.filter(members=request.user)
-
 
     context = {
         "projects_list": projects_list,
