@@ -1,5 +1,5 @@
 # Tasker
-Task-management solution designed for cross-company utilization. Supports task and project creation and management.
+Task-management solution designed for cross-company utilization. Supports task and project creation and management. Features Django and a templated front end.
 
 
 ## Design
